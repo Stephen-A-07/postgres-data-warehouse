@@ -85,6 +85,16 @@ The project follows industry-standard ETL and data warehousing practices and is 
 ```
 postgres-data-warehouse/
 │
+├── analytics/
+│   ├── visualize_warehouse.py
+│   ├── requirements.txt
+│   └── charts/
+│       ├── sales_by_country.png
+│       ├── sales_by_category.png
+│       ├── monthly_sales_trend.png
+│       ├── top_products.png
+│       └── customer_gender_distribution.png
+│
 ├── datasets/
 │   ├── source_crm/
 │   │   ├── cust_info.csv
@@ -275,10 +285,46 @@ scripts/data_catalog.md
 
 ---
 
+# Analytics & Visualization
+
+The `analytics/` folder contains a Python script that connects to the Gold layer and generates a set of BI-style charts for quick, visual reporting on top of the warehouse.
+
+**Charts generated:**
+
+| Chart                                 | Description                                                        |
+| -------------------------------------- | ------------------------------------------------------------------- |
+| `sales_by_country.png`                 | Total sales by country, ranked with value and % of total labeled   |
+| `sales_by_category.png`                | Sales share by product category (donut chart with totals)          |
+| `monthly_sales_trend.png`              | Monthly sales trend with peak and low points called out             |
+| `top_products.png`                     | Top 10 products by sales                                            |
+| `customer_gender_distribution.png`     | Customer distribution by gender (donut chart)                       |
+
+**Setup:**
+
+```bash
+pip install -r analytics/requirements.txt
+```
+
+Configure the same database connection details used elsewhere in the project via a `.env` file (`DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER`, `DB_PASSWORD`).
+
+**Run:**
+
+```bash
+python analytics/visualize_warehouse.py
+```
+
+Charts are saved as PNG files to `analytics/charts/`.
+
+---
+
 # Technologies Used
 
 * PostgreSQL
 * SQL
+* Python
+* Pandas
+* Matplotlib
+* Seaborn
 * ETL
 * Data Warehousing
 * Medallion Architecture
@@ -300,6 +346,7 @@ scripts/data_catalog.md
 * Data Validation
 * Query Optimization
 * Analytical SQL
+* Data Visualization (Python/Matplotlib/Seaborn)
 
 ---
 
